@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  jenkins:
+    restart: always
+    image: circulo7/jenkins_kube:2.175-jdk11
+    environment:
+      - JAVA_OPTS="-Duser.timezone=America/Lima"
+    ports:
+      - "10081:8080"
+    volumes:
+      - jenkins:/var/jenkins_home
+      - ./backups:/var/backups
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  jenkins:
+    driver: local
